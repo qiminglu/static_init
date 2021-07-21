@@ -13,14 +13,11 @@ string(APPEND ${CMAKE_CXX_FLAGS} "-Wall -Werror")
 # python
 add_subdirectory(pybind11)
 
-
+#
 add_library(synergia_core SHARED syn_core.cc)
 
-add_library(lsexpr SHARED lsexpr.cc)
-target_link_libraries(lsexpr synergia_core)
-
 pybind11_add_module(pylsexpr lsexpr_pywrap.cc)
-target_link_libraries(pylsexpr PRIVATE lsexpr)
+target_link_libraries(pylsexpr PRIVATE synergia_core)
 
 
 add_executable(cxx_load cxx_load.cc)
